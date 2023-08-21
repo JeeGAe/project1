@@ -1,0 +1,51 @@
+@import url("./app.css");
+.register-container {
+  width: 30%;
+  height: 50%;
+  background-color: #333436;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  border-radius: 10px;
+}
+.register-container > div {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.register-container > div img {
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+}
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.register-container form ul {
+  width: 80%;
+}
+.register-container form ul li {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  color: #baa178;
+}
+.register-container form ul li label {
+  width: 30%;
+}
+.register-container form ul li input {
+  width: 70%;
+  margin-left: 0.3rem;
+}
+.register-container form ul li .register-btn {
+  all: unset;
+  cursor: pointer;
+  width: auto;
+  padding: 0.4rem 0.5rem;
+  border-radius: 5px;
+  background-color: #ba3734;
+  color: #baa178;
+  text-decoration: none;
+}/*# sourceMappingURL=register.css.map */

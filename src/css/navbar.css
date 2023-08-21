@@ -1,0 +1,84 @@
+@import url("./app.css");
+.header {
+  position: relative;
+  z-index: 6;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #333436;
+  height: 96px;
+  z-index: 6;
+}
+
+.main-nav-menu-container {
+  display: flex;
+}
+.main-nav-menu-container .main-nav-menu {
+  background-color: #333436;
+  font-weight: bold;
+  border-left: 1px solid grey;
+  width: 98px;
+  text-align: center;
+  cursor: pointer;
+}
+.main-nav-menu-container .main-nav-menu a {
+  line-height: 96px;
+  color: #bebebc;
+  text-decoration: none;
+}
+.main-nav-menu-container .main-nav-menu:hover {
+  background-color: rgb(31, 31, 31);
+}
+.main-nav-menu-container .main-nav-menu:hover a {
+  color: #baa178;
+}
+
+.dropmenu {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(51, 52, 54, 0.7);
+  opacity: 0;
+  transition: 0.5s;
+  top: 0px;
+  position: absolute;
+  z-index: -5;
+}
+.dropmenu.move-down {
+  top: 96px;
+  opacity: 1;
+  z-index: -5;
+}
+.dropmenu > div {
+  flex: 0 0 auto;
+  width: 240px;
+  height: 94px;
+}
+.dropmenu > ul {
+  display: flex;
+  justify-content: end;
+}
+.dropmenu > ul ul {
+  width: 98px;
+  border-left: 1px solid grey;
+  padding-bottom: 1rem;
+}
+.dropmenu > ul ul:hover {
+  background-color: rgb(31, 31, 31);
+}
+.dropmenu > ul ul li {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+  color: #bebebc;
+}
+.dropmenu > ul ul li a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #bebebc;
+}
+.dropmenu > ul ul li a:hover {
+  color: #baa178;
+}/*# sourceMappingURL=navbar.css.map */

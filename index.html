@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>베스타</title>
+  <link rel="stylesheet" href="./src/css/app.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+</head>
+<body>
+  <!-- 헤더 -->
+  <header>
+    <nav class="main-nav">
+      <div class="main-nav-logo">
+        <img src="http://www.vestabuffet.com/common/img/logo.gif" alt="main-logo">
+      </div>
+      <ul class="main-nav-menu-container">
+        <li class="main-nav-menu">
+          <a href="" class="nav-introduce">INTRODUCE</a>
+        </li>
+        <li class="main-nav-menu">
+          <a href="" class="nav-facilty">FACILTY</a>
+        </li>
+        <li class="main-nav-menu">
+          <a href="" class="nav-foodmenu">MENU</a>
+        </li>
+        <li class="main-nav-menu">
+          <a href="" class="nav-banquet">BANQUET</a>
+        </li>
+        <li class="main-nav-menu">
+          <a href="" class="nav-event">EVENT</a>
+        </li>
+        <li class="main-nav-menu">
+          <a href="" class="nav-customer">CUSTOMER</a>
+        </li>
+        <li class="main-nav-menu" id="book-check">
+          <a href="" class="nav-book">예약 및 조회</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="dropmenu">
+      <div></div>
+      <ul>
+        <ul class="drop-nav-menu">
+          <li><a href="">베스타소개</a></li>
+          <li><a href="">이용안내</a></li>
+          <li><a href="">오시는 길</a></li>
+        </ul>
+        <ul class="drop-nav-menu">
+          <li><a href="">뷔페 전경사진</a></li>
+          <li><a href="">연회룸 소개</a></li>
+          <li><a href="">가족룸/놀이방 소개</a></li>
+        </ul>
+        <ul class="drop-nav-menu">
+          <li><a href="">뷔페메뉴</a></li>
+          <li><a href="">Beverage</a></li>
+          <li><a href="">바리스타코너</a></li>
+        </ul>
+        <ul class="drop-nav-menu">
+          <li><a href="">돌잔치 안내</a></li>
+          <li><a href="">고회/회갑연 안내</a></li>
+          <li><a href="">피로연 및 단체행사안내</a></li>
+        </ul>
+        <ul class="drop-nav-menu">
+          <li><a href="">이벤트</a></li>
+          <li><a href="">공지사항</a></li>
+        </ul>
+        <ul class="drop-nav-menu">
+          <li><a href="">고객의소리</a></li>
+          <li><a href="">FAQ</a></li>
+          <li><a href="">채용공고</a></li>
+        </ul>
+        <ul class="drop-nav-menu">
+          <li id="login-user-name"></li>
+          <li><a href="" id="login-logout"></a></li>
+        </ul>
+      </ul>
+    </div>
+  </header>
+  <!-- 로그인 모달 -->
+  <div class="login-modal-container hidden">
+    <div>
+      <img src="http://www.vestabuffet.com/common/img/logo.gif" alt="main-logo">
+    </div>
+    <form action="" id="login-form">
+      <ul>
+        <li><label for="user-id">아이디</label> <input type="text" placeholder="아이디를 입력하세요."></li>
+        <li><label for="password">패스워드<br></label> <input type="password" placeholder="패스워드를 입력하세요"></li>
+        <li><div id="failed-login"></div><a href="" id="login-btn">로그인</a></li>
+      </ul>
+    </form>
+    <p>회원이 아니신가요? <a href="">회원가입</a></p>
+    <button class="login-modal-close-btn">닫기</button>
+  </div>
+
+
+  <!-- 메인 -->
+  <main>
+    <!-- 메인 캐러셀 영역 -->
+    <section>
+      <article class="main-carousel-container">
+        <div class="img-container">
+          <img src="http://www.vestabuffet.com/main/1.jpg" alt="">
+        </div>
+        <div class="img-container">
+          <img src="http://www.vestabuffet.com/main/2.jpg" alt="">
+        </div>
+        <div class="img-container">
+          <img src="http://www.vestabuffet.com/main/3.jpg" alt="">
+        </div>
+        <div class="img-container">
+          <img src="http://www.vestabuffet.com/main/4.jpg" alt="">
+        </div>
+        <div class="img-container">
+          <img src="http://www.vestabuffet.com/main/5.jpg" alt="">
+        </div>
+      </article>
+      <div class="main-indicator-container indicator">
+        <div class="main-indicator" id="main-indicator-0"></div>
+        <div class="main-indicator" id="main-indicator-1"></div>
+        <div class="main-indicator" id="main-indicator-2"></div>
+        <div class="main-indicator" id="main-indicator-3"></div>
+        <div class="main-indicator" id="main-indicator-4"></div>
+      </div>
+    </section>
+    <!-- 컨텐츠 영역 -->
+    <section class="main-contents-container">
+      <article class="news">
+        <h2>공지사항</h2>
+      </article>
+      <article class="event-carousel-container">
+        <div class="event-carousel">
+          <div class="img-container">
+            <img src="http://www.vestabuffet.com/upData/bbs2/bbs2_1691390852_11691390852.jpg" alt="">
+          </div>
+          <div class="img-container">
+            <img src="http://www.vestabuffet.com/upData/bbs2/bbs2_1666232508_11666232508.jpg" alt="">
+          </div>
+          <div class="img-container">
+            <img src="http://www.vestabuffet.com/upData/bbs2/bbs2_1652172608_11652172608.jpg" alt="">
+          </div>
+          <div class="img-container">
+            <img src="http://www.vestabuffet.com/upData/bbs2/bbs2_1639207245_11639207245.jpg" alt="">
+          </div>
+          <div class="img-container">
+            <img src="http://www.vestabuffet.com/upData/bbs2/bbs2_1574660746_11574660746" alt="">
+          </div>
+        </div>
+        <div class="event-indicator-container indicator">
+          <div class="event-indicator" id="event-indicator-0"></div>
+          <div class="event-indicator" id="event-indicator-1"></div>
+          <div class="event-indicator" id="event-indicator-2"></div>
+          <div class="event-indicator" id="event-indicator-3"></div>
+          <div class="event-indicator" id="event-indicator-4"></div>
+        </div>
+      </article>
+    </section>
+    <div class="space"></div>
+    <!-- 스크롤 이벤트 영역 -->
+    <div class="scroll-contents-container">
+      <div class="scroll-content ">
+        <div class="scroll-img-container scroll-move-down">
+          <img src="http://www.vestabuffet.com/sub3/img/menu1_1.jpg" alt="">
+          <img src="http://www.vestabuffet.com/sub3/img/menu7_5.jpg" alt="">
+        </div>
+        <div class="scroll-comments-container scroll-move-left">
+          <h3>FOOD</h3>
+          <p>신선하고 다양한 재료를 사용한 요리들이 즐비해있고 다양한 음료와 와인들이 준비되어있습니다.</p>
+        </div>
+      </div>
+
+      <div class="scroll-content ">
+        <div class="scroll-comments-container scroll-move-right text-right">
+          <h3>BUFFET</h3>
+          <p>오픈 키친 형태로 설계 되어 200여종 계절별 요리와 한식 중식 일식 이태리식 메뉴를 코스별로 맛볼 수 있습니다.</p>
+        </div>
+        <div class="scroll-img-container scroll-move-down">
+          <img src="http://www.vestabuffet.com/sub2/img/gallery1/gall1.jpg" alt="">
+          <img src="http://www.vestabuffet.com/sub2/img/gallery1/gall7.jpg" alt="">
+        </div>
+      </div>
+
+      <div class="scroll-content ">
+        <div class="scroll-img-container scroll-move-down">
+          <img src="http://www.vestabuffet.com/sub2/img/room1/5gall4.jpg" alt="">
+          <img src="http://www.vestabuffet.com/sub2/img/room1/7gall1.jpg" alt="">
+        </div>
+        <div class="scroll-comments-container scroll-move-left">
+          <h3>BANQUET</h3>
+          <p>다양한 연회룸이 있어 행사에 맞는 연회룸을 선택하여 근사한 추억을 보내실 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- 스크롤 안내 -->
+  <aside>
+    <div class="scroll-notice-container">
+      <span class="material-symbols-outlined">
+        keyboard_double_arrow_down
+      </span>
+      <p>
+        아래로 내려 베스타를 살펴보세요!  
+      </p>
+    </div>
+  </aside>
+  <!-- 푸터 -->
+  <footer class="hidden">
+    <div>
+      <div>
+        <p><i>업체명</i> 유한회사베스타까르르스타</p>
+        <p><i>사업자등록번호</i>  314-86-25446 </p>
+        <p><i>대표자</i>  박건용</p>
+        <p><i>주소</i>  대전광역시 서구 만년동 339</p>
+      </div>
+      <div>
+        <p><i>팩스</i>  042-487-3396</p>
+        <p><i>일반식사문의</i>  042-487-3366</p>
+        <p><i>단체행사문의</i>  042-487-3355</p>
+      </div>
+    </div>
+    
+    <p>COPYRIGHT(C) PREMIUM PUFFET. ALL RIGHTS RESERVED.</p>
+  </footer>
+  <div class="blur-container hidden"></div>
+  <script src="./src/js/app.js"></script>
+  <script src="./src/js/dropmenu.js"></script>
+</body>
+</html>

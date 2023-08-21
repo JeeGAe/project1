@@ -1,0 +1,337 @@
+@import url('./reset.css');
+@import url('./navbar.css');
+
+$primary-color: #baa178;
+$secodary-color: #ba3734;
+$font-color: #bebebc;
+$background-color: #333436;
+
+main{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -10;
+
+  // 메인 캐러셀
+  .main-carousel-container{
+    z-index: -10;
+    display: flex;
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    // & div:nth-child(1) ~ div{
+    //   display: none;
+    // }
+    .img-container{
+      flex: 0 0 auto;
+      width: 100%;
+      height: 100%;
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  // .main-indicator-container{
+    
+  //   .main-indicator{
+  //     cursor: pointer;
+  //     border-radius: 50%;
+  //     background-color: black;
+  //     width: 8px;
+  //     height: 8px;
+  //     &.highlight{
+  //       background-color: #baa178;
+  //     }
+  //   }
+  // }
+  .indicator{
+    margin-top: .5rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    div{
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: black;
+      width: 8px;
+      height: 8px;
+      &.highlight{
+        background-color: #baa178;
+      }
+    }
+  }
+
+  // 컨텐츠 부분
+  .main-contents-container{
+    margin-top: 2rem;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    .news{
+      width: 50%;
+    }
+    .event-carousel-container{
+      margin-top: 2.5rem;
+      display: flex;
+      width: 50%;
+      flex-direction: column;
+      align-items: center;
+      .event-carousel{
+        display: flex;
+        overflow: hidden;
+        max-width: 750px;
+      }
+      .img-container{
+        flex: 0 0 auto;
+        width: 100%;
+        img{
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// 스크롤 이벤트
+.scroll-contents-container{
+  width: 90%;
+  .scroll-content{
+    position: relative;
+    display: none;
+    width: 100%;
+    gap : 1.5rem;
+    margin-top: 5rem;
+    &.scroll-show{
+      display: flex;
+    }
+    & .scroll-img-container:nth-child(1){
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+    .scroll-img-container{
+      position: relative;
+      width: 80%;
+      transition: 1s;
+      opacity: 1;
+      img{
+        width: 80%;
+        border-radius: 10px;
+      }
+      & img:nth-child(2){
+        width: 65%;
+      }      
+      &.scroll-move-down{
+        transform: translateY(-10rem);
+        opacity: 0;
+      }
+    }
+    .scroll-comments-container{
+      width: 40%;
+      transition: 1s;
+      h3{
+        font-size: 5rem;
+        color: $secodary-color;
+      }
+      p{
+        margin-top: 2rem;
+        font-size: 3rem;
+      }
+      &.text-right{
+        text-align: end;
+      }
+      &.scroll-move-left{
+        transform: translateX(10rem);
+        opacity: 0;
+      }
+      &.scroll-move-right{
+        transform: translateX(-10rem);
+        opacity: 0;
+      }
+    }
+  }
+}
+// @keyframes scroll-move-down{
+//   from{
+//     transform: translateY(-10rem);
+//     opacity: 0;
+//   }
+//   to{
+//     transform: translateY(0);
+//     opacity: 1;
+//   }
+// }
+// @keyframes scroll-move-left{
+//   from{
+//     transform: translateX(10rem);
+//     opacity: 0;
+//   }
+//   to{
+//     transform: translateX(0);
+//     opacity: 1;
+//   }
+// }
+// @keyframes scroll-move-right{
+//   from{
+//     transform: translateX(-10rem);
+//     opacity: 0;
+//   }
+//   to{
+//     transform: translateX(0);
+//     opacity: 1;
+//   }
+// }
+
+.space{
+  width: 1rem;
+  height: 150px;
+}
+
+// 스크롤 안내
+.scroll-notice-container{
+  position: fixed;
+  bottom : 0;
+  left : 50%;
+  transform: translateX(-50%);
+  height: 2.1rem;
+  background-color: rgba(0, 0, 0, .3);
+  color: #fff;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  align-items: center;
+  padding-right: .3rem;
+  span{
+    animation: arrow-down 1.5s infinite;
+  }
+  &.hidden{
+    display: none;
+  }
+}
+@keyframes arrow-down{
+  from{
+    opacity: 1;
+  }
+  to{
+    transform: translateY(.5rem);
+    opacity: 0;
+  }
+}
+
+footer{
+  margin-top: 3rem;
+  padding-top: 1rem;
+  font-size: .8rem;
+  color: $font-color;
+  background-color: $background-color;
+  &.hidden{
+    display: none;
+  }
+  &>div{
+    display: flex;
+    justify-content: center;
+    div{
+      margin-left: 3rem;
+      width: 50%;
+      i{
+        color: $primary-color;
+      }
+    }
+  }
+  &>p{
+    text-align: center;
+  }
+}
+
+// 로그인 모달창
+.login-modal-container{
+  z-index: 30;
+  width: 30%;
+  height: 50%;
+  background-color: $background-color;
+  position: fixed;
+  top : 50%; left : 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  &>div{
+    width: 100%;
+    margin-bottom: 2rem;
+    img{
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+    }
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    ul{
+      width: 80%;
+      li{
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        color: $primary-color;
+        label{
+          width: 30%;
+        }
+        input{
+          width: 70%;
+          margin-left: .3rem;
+        }
+        a{
+          padding: .2rem .5rem;
+          border-radius: 5px;
+          background-color: $secodary-color;
+          color : $primary-color;
+          text-decoration: none;
+        }
+        div{
+          color : $secodary-color;
+          font-weight: bold;
+        }
+      }
+      
+    }
+  }
+   
+  p{
+    color: $primary-color;
+    a{
+      color: #ba3734;
+    }
+  }
+  .login-modal-close-btn{
+    all: unset;
+    background-color: $secodary-color;
+    margin-top: 1rem;
+    color: $primary-color;
+    padding: .2rem .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  &.hidden{
+    display: none;
+  }
+
+}
+
+.blur-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .6);
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  &.hidden{
+    display: none;
+  }
+}

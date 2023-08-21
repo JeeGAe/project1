@@ -1,0 +1,91 @@
+@import url('./app.css');
+
+$primary-color: #baa178;
+$secodary-color: #ba3734;
+$font-color: #bebebc;
+$background-color: #333436;
+
+// 메인 네비게이션
+.header{
+  position: relative;
+  z-index: 6;
+}
+.main-nav{
+  display: flex;
+  justify-content: space-between;
+  background-color: $background-color;
+  height: 96px;
+  z-index: 6;
+}
+// 메인 네비게이션 메뉴 부분
+.main-nav-menu-container{
+  display: flex;
+  .main-nav-menu{
+    background-color: $background-color;
+    font-weight: bold;
+    border-left: 1px solid grey;
+    width: 98px;
+    text-align: center;
+    cursor: pointer;
+    a{
+      line-height: 96px;
+      color: $font-color;
+      text-decoration: none;
+    }
+    &:hover{
+      background-color: rgb(31, 31, 31);
+    }
+    &:hover a{
+      color: $primary-color;
+    }
+  }
+}
+// 드랍메뉴
+.dropmenu{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(51, 52, 54, .7);
+  opacity: 0;
+  transition: .5s;
+  top: 0px;
+  position: absolute;
+  z-index: -5;
+  &.move-down{
+    top: 96px;
+    opacity: 1;
+    z-index: -5;
+  }
+  &>div{
+    flex: 0 0 auto;
+    width: 240px;
+    height: 94px;
+  }
+  &>ul{
+    display: flex;
+    justify-content: end;
+    & ul{
+      width: 98px;
+      border-left: 1px solid grey;
+      padding-bottom: 1rem;
+      &:hover{
+        background-color: rgb(31, 31, 31);
+      }
+      & li{
+        margin-top: 1.5rem;
+        text-align: center;
+        font-weight: bold;
+        color: $font-color;
+        & a{
+          font-weight: bold;
+          text-decoration: none;
+          color: $font-color;
+          &:hover{
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+}
+

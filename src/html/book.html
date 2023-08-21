@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>베스타</title>
+</head>
+<body>
+  <div class="banquet-selector-container">
+    <button>오리온</button>
+    <button>피닉스</button>
+    <button>아르고</button>
+  </div>
+
+  <div class="calendar-selector-container">
+    <table>
+      <thead>
+        <tr>
+          <td>일</td>
+          <td>월</td>
+          <td>화</td>
+          <td>수</td>
+          <td>목</td>
+          <td>금</td>
+          <td>토</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="first-week">
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="time-selector-container hidden">
+    <div class="am-pm-container">
+      <button>오전</button>
+      <button>오후</button>
+    </div>
+    <button id="book-btn">예약하기</button>
+  </div>
+  <script src="../js/book.js"></script>
+  <!-- <script src="../js/dropmenu.js"></script> -->
+</body>
+</html>

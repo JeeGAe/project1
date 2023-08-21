@@ -1,0 +1,59 @@
+@import url('./app.css');
+
+$primary-color: #baa178;
+$secodary-color: #ba3734;
+$font-color: #bebebc;
+$background-color: #333436;
+
+.register-container{
+  width: 30%;
+  height: 50%;
+  background-color: $background-color;
+  top : 50%; left : 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  
+  border-radius: 10px;
+  &>div{
+    width: 100%;
+    margin-bottom: 2rem;
+    img{
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+    }
+  }
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    ul{
+      width: 80%;
+      li{
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        color: $primary-color;
+        label{
+          width: 30%;
+        }
+        input{
+          width: 70%;
+          margin-left: .3rem;
+        }
+        .register-btn{
+          all: unset;
+          cursor: pointer;
+          width: auto;
+          padding: .4rem .5rem;
+          border-radius: 5px;
+          background-color: #ba3734;
+          color : $primary-color;
+          text-decoration: none;
+        }
+      }
+      
+    }
+  }
+  
+}
