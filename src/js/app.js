@@ -239,6 +239,9 @@ isLogin()
 .then((res) => {
   if(res){
     book_check.removeEventListener('click', modalOpen);
+    book_check.addEventListener('click', () => {
+      location.href = './src/html/book.html'
+    });
   }
 })
 

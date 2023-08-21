@@ -14,6 +14,11 @@
   </div>
 
   <div class="calendar-selector-container">
+    <div class="chage-month">
+      <button class="prev-month">◀</button>
+      <h4></h4>
+      <button class="next-month">▶</button>
+    </div>
     <table>
       <thead>
         <tr>
@@ -35,11 +40,17 @@
   
   <div class="time-selector-container hidden">
     <div class="am-pm-container">
-      <button>오전</button>
-      <button>오후</button>
+      <button id="am-btn">오전</button>
+      <button id="pm-btn">오후</button>
     </div>
     <button id="book-btn">예약하기</button>
   </div>
+
+  <div class="booked-contaier">
+    <h2>예약 목록</h2>
+  </div>
+
+
   <script src="../js/book.js"></script>
   <!-- <script src="../js/dropmenu.js"></script> -->
 </body>

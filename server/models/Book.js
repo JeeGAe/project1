@@ -13,7 +13,7 @@ const BookSchema = new mongoose.Schema({
   bookAm : {
     type : Boolean,
   },
-  BookPm : {
+  bookPm : {
     type : Boolean,
   },
   userId : {

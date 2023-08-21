@@ -12,6 +12,9 @@ let isPm = false;
 
 // console.log(new Date(year, month).getDay());
 // console.log(new Date(`${year}-${month}`).getDay());
+// 초기 년도와 월을 현재 기준으로 표기
+const changeMonth = document.querySelector('h4');
+changeMonth.innerText = `${year}-${month+1}`;
 
 function createCalendar(year, month){
   // 달에 1일 전에 있는 빈 공간 생성
@@ -42,13 +45,62 @@ function createCalendar(year, month){
 }
 
 createCalendar(year, month);
-
+// 연도와 월 옆 화살표로 월 단위 변경
+const chageMonth = document.querySelector('.chage-month');
+chageMonth.addEventListener('click', (event) => {
+  if(event.target.className === 'prev-month'){
+    selectMonth--;
+    if(selectMonth < 0){
+      selectMonth = 11;
+      selectYear--;
+    }
+    changeMonth.innerText = `${selectYear}-${selectMonth+1}`;
+    document.querySelector('tbody').innerHTML = '<tr id="first-week"></tr>';
+    createCalendar(selectYear, selectMonth);
+  }else if(event.target.className === 'next-month'){
+    selectMonth++;
+    if(selectMonth > 11){
+      selectMonth = 0;
+      selectYear++;
+    }
+    changeMonth.innerText = `${selectYear}-${selectMonth+1}`;
+    document.querySelector('tbody').innerHTML = '<tr id="first-week"></tr>';
+    createCalendar(selectYear, selectMonth);
+  }
+})
+// 예약 캘린터에서 일 수를 클릭했을때 이벤트
 function clickDate(event){
   if(event.target.tagName === 'TD'){
     const timeSelectorContainer = document.querySelector('.time-selector-container');
     timeSelectorContainer.classList.remove('hidden');
     selectDate = parseInt(event.target.textContent);
     console.log(selectDate);
+    fetch(`http://127.0.0.1:3301/api/books/reservation?year=${selectYear}&month=${selectMonth}&date=${selectDate}`, {
+      method : 'GET',
+    })
+    .then(res => res.json())
+    .then(res => {
+      if(res.reservation.length === 1){
+        if(res.reservation.isAm){
+          const amBtn = document.querySelector('#am-btn');
+          amBtn.style.backgroundColor = 'red';
+          amBtn.disabled = true;
+        }else{
+          const pmBtn = document.querySelector('#pm-btn');
+          pmBtn.style.backgroundColor = 'red';
+          pmBtn.disabled = true;
+        }
+      }else if(res.reservation.length === 2){
+        const amBtn = document.querySelector('#am-btn');
+        amBtn.style.backgroundColor = 'red';
+        amBtn.disabled = true;
+        const pmBtn = document.querySelector('#pm-btn');
+        pmBtn.style.backgroundColor = 'red';
+        pmBtn.disabled = true;
+      }
+        
+      
+    })
   }
 }
 
@@ -78,6 +130,7 @@ function bookToServer(event){
       bookPm : isPm,
     })
   })
+  .then((res) => { location.reload();})
 }
 
 const am_pmContainer = document.querySelector('.am-pm-container');
@@ -93,4 +146,30 @@ am_pmContainer.addEventListener('click', (event) => {
     const bookBtn = document.querySelector('#book-btn');
     bookBtn.addEventListener('click', bookToServer);
   }
+})
+
+fetch('http://127.0.0.1:3301/api/books', {
+  method : 'GET',
+  credentials : "include",
+})
+.then(res => res.json())
+.then(res => {
+  console.log(res.reservation);
+  if(res.reservation){
+    for(i = 0; i < res.reservation.length; i++){
+      let bookTime = ''
+      if(res.reservation[i].bookAm){
+        bookTime = '오전';
+      }else{
+        bookTime = '오후';
+      }
+      const reservationList = document.createElement('div');
+      reservationList.innerHTML = `
+        <p>${res.reservation[i].date.slice(0, 10)}  ${res.reservation[i].banquet}  ${bookTime}</p>
+      `;
+      const bookedContaier = document.querySelector('.booked-contaier');
+      bookedContaier.appendChild(reservationList);
+    }
+  }
+  
 })
