@@ -147,6 +147,7 @@ window.addEventListener('scroll', (event) => {
 })
 // 로그인 모달
 function modalOpen(event) {
+  console.log('dasdas')
   event.preventDefault();
   document.body.style.overflow = 'hidden'
   const loginModalContainer = document.querySelector('.login-modal-container');
@@ -161,9 +162,9 @@ function modalOpen(event) {
   })
   
 }
-
-const book_check = document.getElementById('book-check');
-book_check.addEventListener('click', modalOpen);
+// 예약 조회 클릭시 비로그인 상태면 로그인 창 열기
+const book_check = document.querySelectorAll('.book-check');
+book_check.forEach(book_check => book_check.addEventListener('click', modalOpen));
 
 const navBook = document.querySelector('.nav-book');
 navBook.addEventListener('click', (event) => {
@@ -202,9 +203,10 @@ loginBtn.addEventListener('click', event => {
     console.log(e)
   })
 })
-
+// 로그인 되어있는지 체크후 로그인 페이지를 설정
 async function isLogin(){
   let user_name = '';
+  if(!document.cookie.includes('Token')) return ;
   await fetch('http://127.0.0.1:3301/api/users/isLogin',{
     method: 'GET',
     credentials : "include",
@@ -214,8 +216,8 @@ async function isLogin(){
     if(!res.ok){
       console.log('no login');
     }else{
-      const loginLogout = document.getElementById('login-logout');
-      loginLogout.innerText = '로그아웃';
+      const loginLogout = document.querySelectorAll('.login-logout');
+      loginLogout.forEach(loginLogout => loginLogout.innerText = '로그아웃');
     }
     return res.json();
   })
@@ -223,8 +225,8 @@ async function isLogin(){
     const { name } = res;
     user_name = name;
     if(name){
-      const loginUserName = document.getElementById('login-user-name');
-      loginUserName.innerText = `${name}님`
+      const loginUserName = document.querySelectorAll('.login-user-name');
+      loginUserName.forEach(loginUserName => loginUserName.innerText = `${name}님`);
     }
   }).catch(e =>{
     console.log(e)
@@ -238,15 +240,16 @@ async function isLogin(){
 isLogin()
 .then((res) => {
   if(res){
-    book_check.removeEventListener('click', modalOpen);
-    book_check.addEventListener('click', () => {
+    book_check.forEach(book_check => book_check.removeEventListener('click', modalOpen));
+    book_check.forEach(book_check => book_check.addEventListener('click', (event) => {
+      event.preventDefault();
       location.href = './src/html/book.html'
-    });
+    }));
   }
 })
 
 // 로그아웃 버튼 이벤트
-const loginLogout = document.getElementById('login-logout');loginLogout.addEventListener('click', (event) => {
+const loginLogout = document.querySelectorAll('.login-logout');loginLogout.forEach(loginLogout => loginLogout.addEventListener('click', (event) => {
   event.preventDefault();
   fetch('http://127.0.0.1:3301/api/users/logout', {
     method: 'GET',
@@ -257,4 +260,5 @@ const loginLogout = document.getElementById('login-logout');loginLogout.addEvent
     location.reload();
   })
   .catch(e => console.log(e));
-})
+}))
+

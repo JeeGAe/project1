@@ -57,3 +57,31 @@ $background-color: #333436;
   }
   
 }
+
+@media (max-width: 950px) {
+  .register-container{
+    width: 40%;
+  }
+}
+
+@media (max-width: 720px) {
+  .register-container{
+    width: 60%;
+  }
+}
+
+@media (max-width: 470px) {
+  .register-container{
+    width: 90%;
+  }
+}
+
+@media (max-width: 320px) {
+  form{
+    ul{
+      li{
+        font-size: .8rem;
+      }
+    }
+  }
+}

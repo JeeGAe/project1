@@ -45,7 +45,7 @@ router.post('/login', expressAsyncHandler(async (req, res) => {
 
 // 로그인 했는지 확인
 router.get('/isLogin', isAuth, expressAsyncHandler(async (req, res) => {
-  // console.log(req.cookies.Token);
+  console.log(req.cookies.Token);
   const { name } = req.user;
   res.status(200).json({ code : 200, message : 'Ok', name });
   // const token = req.cookies.Token;

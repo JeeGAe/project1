@@ -1,0 +1,194 @@
+$primary-color: #baa178;
+$secodary-color: #ba3734;
+$font-color: #bebebc;
+$background-color: #333436;
+// 연회장 선택 버튼
+.banquet-selector-container{
+  position: relative;
+  margin-top: 5rem;
+  z-index: -100;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  button{
+    all: unset;
+    font-size: 1.5rem;
+    background-color: $secodary-color;
+    padding: .5rem .8rem;
+    border-radius: 10px;
+    color: $primary-color;
+    font-weight: bold;
+    cursor: pointer;
+    &.select-banquet{
+      background-color: #5e1e1d;
+    }
+  }
+}
+.after-banquet-select-container{
+  display: flex;
+  justify-content: center;
+  margin-top: .5rem;
+  p{
+    color: red;
+  }
+}
+// 년도와 월 선택 부분
+.calendar-selector-container{
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  .chage-month{
+    display: flex;
+    button{
+      all: unset;
+      font-size: 1.2rem;
+      margin: 0 .5rem;
+      cursor: pointer;
+    }
+    h4{
+      font-size: 1.4rem;
+    }
+  }
+}
+// 캘린더
+table{
+  thead{
+    font-size: 1.2rem;
+    font-weight: bold;
+    td{
+      border-bottom: 1px solid $background-color;
+      padding: .3rem 1.2rem;
+    }
+  }
+  tbody{
+    td{
+      // border: 1px solid $background-color;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      &.select-date{
+        background-color: $primary-color;
+      }
+    }
+  }
+}
+// 캘린더와 오전 오후 예약을 같은 라인에 두기위함
+.calendar-container{
+  display: flex;
+  gap: 2rem
+}
+
+.time-selector-container{
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  button{
+    all: unset;
+    background-color: $secodary-color;
+    color: $primary-color;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: .3rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .am-pm-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    button{
+      background-color: rgb(171, 255, 45);
+      &.select-time{
+        background-color: rgb(0, 255, 8);
+      }
+      &.impossible{
+        background-color: red;
+      }
+    }
+  }
+  .possible-box{
+    display: inline;
+    width: .8rem;
+    height: .8rem;
+    background-color: rgb(171, 255, 45);
+  }
+  .impossible-box{
+    display: inline;
+    width: .8rem;
+    height: .8rem;
+    background-color: red;
+  }
+  &.hidden{
+    display: none;
+  }
+}
+
+.booked-contaier{
+  position: relative;
+  z-index: -50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  background-color: $background-color;
+  color: $font-color;
+  h2{
+    padding-top: .5rem;
+    color: $primary-color;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  p{
+    margin-bottom: .5rem;
+    font-size: 1.5rem;
+  }
+  button{
+    all: unset;
+    background-color: $secodary-color;
+    color: $primary-color;
+    padding: .3rem .5rem;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 600px) {
+  .calendar-container{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 410px) {
+  .banquet-selector-container{
+    button{
+      font-size: 1rem;
+    }
+  }
+  table{
+    thead{
+      font-size: .9rem;
+      td{
+        padding: .3rem .5rem;
+      }
+    }
+    tbody{
+      td{
+        font-size: .8rem;
+        padding: .5rem;
+      }
+    }
+  }
+  .booked-contaier{
+    h2{
+      font-size: 1.5rem;
+    }
+    p{
+      font-size: 1rem;
+    }
+  }
+}

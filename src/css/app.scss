@@ -72,11 +72,21 @@ main{
     justify-content: center;
     .news{
       width: 50%;
+      h2{
+        margin-bottom: 1rem;
+      }
+      li{
+        margin-bottom: .5rem;
+      }
+      a{
+        text-decoration: none;
+        color: black;
+        
+      }
     }
     .event-carousel-container{
       margin-top: 2.5rem;
       display: flex;
-      width: 50%;
       flex-direction: column;
       align-items: center;
       .event-carousel{
@@ -93,6 +103,10 @@ main{
       }
     }
   }
+}
+
+.event-carousel-container{
+  width: 50%;
 }
 
 // 스크롤 이벤트
@@ -333,5 +347,109 @@ footer{
   z-index: 20;
   &.hidden{
     display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .scroll-contents-container{
+    .scroll-content{
+      .scroll-comments-container{
+        h3{
+          font-size: 4rem;
+        }
+        p{
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .main-contents-container{
+    flex-direction: column;
+    justify-content: none;
+    align-items: center;
+    
+    
+  }
+  .event-carousel-container{
+    width: 100%;
+  }
+  .login-modal-container{
+    width: 40%;
+  }
+}
+
+@media (max-width: 750px) {
+  .scroll-contents-container{
+    .scroll-content{
+      align-items: center;
+      flex-direction: column;
+      // .scroll-comments-container{
+      //   h3{
+      //     font-size: 3rem;
+      //   }
+      //   p{
+      //     font-size: 1.5rem;
+      //   }
+      // }
+    }
+  }
+  .login-modal-container{
+    width: 65%;
+  }
+}
+
+@media (max-width: 600px) {
+  .scroll-notice-container{
+    font-size: .8rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .scroll-contents-container{
+    .scroll-content{
+      align-items: center;
+      flex-direction: column;
+      .scroll-comments-container{
+        width: 80%;
+        h3{
+          font-size: 3rem;
+        }
+        p{
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  .login-modal-container{
+    width: 90%;
+  }
+
+  footer{
+    font-size: .5rem;
+  }
+}
+
+@media (max-width: 370px) {
+  .scroll-contents-container{
+    .scroll-content{
+      .scroll-comments-container{
+        h3{
+          font-size: 2.5rem;
+        }
+        p{
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+  form{
+    ul{
+      li{
+        font-size: .8rem;
+      }
+    }
   }
 }

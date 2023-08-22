@@ -1,0 +1,176 @@
+.banquet-selector-container {
+  position: relative;
+  margin-top: 5rem;
+  z-index: -100;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.banquet-selector-container button {
+  all: unset;
+  font-size: 1.5rem;
+  background-color: #ba3734;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  color: #baa178;
+  font-weight: bold;
+  cursor: pointer;
+}
+.banquet-selector-container button.select-banquet {
+  background-color: #5e1e1d;
+}
+
+.after-banquet-select-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.after-banquet-select-container p {
+  color: red;
+}
+
+.calendar-selector-container {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.calendar-selector-container .chage-month {
+  display: flex;
+}
+.calendar-selector-container .chage-month button {
+  all: unset;
+  font-size: 1.2rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+.calendar-selector-container .chage-month h4 {
+  font-size: 1.4rem;
+}
+
+table thead {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+table thead td {
+  border-bottom: 1px solid #333436;
+  padding: 0.3rem 1.2rem;
+}
+table tbody td {
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+table tbody td.select-date {
+  background-color: #baa178;
+}
+
+.calendar-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.time-selector-container {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.time-selector-container button {
+  all: unset;
+  background-color: #ba3734;
+  color: #baa178;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.3rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.time-selector-container .am-pm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.time-selector-container .am-pm-container button {
+  background-color: rgb(171, 255, 45);
+}
+.time-selector-container .am-pm-container button.select-time {
+  background-color: rgb(0, 255, 8);
+}
+.time-selector-container .am-pm-container button.impossible {
+  background-color: red;
+}
+.time-selector-container .possible-box {
+  display: inline;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: rgb(171, 255, 45);
+}
+.time-selector-container .impossible-box {
+  display: inline;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: red;
+}
+.time-selector-container.hidden {
+  display: none;
+}
+
+.booked-contaier {
+  position: relative;
+  z-index: -50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  background-color: #333436;
+  color: #bebebc;
+}
+.booked-contaier h2 {
+  padding-top: 0.5rem;
+  color: #baa178;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.booked-contaier p {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+.booked-contaier button {
+  all: unset;
+  background-color: #ba3734;
+  color: #baa178;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .calendar-container {
+    flex-direction: column;
+  }
+}
+@media (max-width: 410px) {
+  .banquet-selector-container button {
+    font-size: 1rem;
+  }
+  table thead {
+    font-size: 0.9rem;
+  }
+  table thead td {
+    padding: 0.3rem 0.5rem;
+  }
+  table tbody td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+  .booked-contaier h2 {
+    font-size: 1.5rem;
+  }
+  .booked-contaier p {
+    font-size: 1rem;
+  }
+}/*# sourceMappingURL=book.css.map */

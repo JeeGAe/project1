@@ -11,6 +11,9 @@
   height: 96px;
   z-index: 6;
 }
+.main-nav .main-nav-logo {
+  cursor: pointer;
+}
 
 .main-nav-menu-container {
   display: flex;
@@ -33,6 +36,9 @@
 }
 .main-nav-menu-container .main-nav-menu:hover a {
   color: #baa178;
+}
+.main-nav-menu-container .main-nav-menu .mini-dropbox {
+  display: none;
 }
 
 .dropmenu {
@@ -81,4 +87,104 @@
 }
 .dropmenu > ul ul li a:hover {
   color: #baa178;
+}
+
+.side-dropmenu {
+  width: 30%;
+  background-color: rgba(51, 52, 54, 0.7);
+  position: absolute;
+  top: 94px;
+  right: 0;
+  text-align: end;
+  z-index: 1;
+}
+.side-dropmenu ul li:nth-child(1) {
+  border-bottom: 1px solid #bebebc;
+}
+.side-dropmenu ul li:nth-child(1) a {
+  font-weight: bold;
+}
+.side-dropmenu ul li:nth-last-child(1) {
+  border-bottom: 1px solid #bebebc;
+}
+.side-dropmenu ul li {
+  padding: 0.2rem 0;
+}
+.side-dropmenu ul li a {
+  text-decoration: none;
+  color: #bebebc;
+  font-size: 1.3rem;
+}
+.side-dropmenu ul .login-user-name {
+  color: #bebebc;
+  font-size: 1.3rem;
+}
+.side-dropmenu ul .login-logout {
+  color: #bebebc;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.side-dropmenu.hidden {
+  display: none;
+}
+
+@media (min-width: 950px) {
+  .side-dropmenu {
+    display: none;
+  }
+}
+@media (max-width: 950px) {
+  .dropmenu {
+    display: none;
+  }
+  .main-nav-menu {
+    display: none;
+  }
+  .mini-dropbox {
+    display: flex;
+    padding-right: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+  }
+  .mini-dropbox div {
+    width: 3rem;
+    height: 4px;
+    background-color: #bebebc;
+  }
+}
+@media (max-width: 770px) {
+  .side-dropmenu {
+    width: 40%;
+  }
+}
+@media (max-width: 600px) {
+  .side-dropmenu {
+    width: 50%;
+  }
+}
+@media (max-width: 450px) {
+  .side-dropmenu {
+    width: 60%;
+  }
+}
+@media (max-width: 380px) {
+  .side-dropmenu ul li a {
+    font-size: 1rem;
+  }
+  .side-dropmenu ul .login-user-name {
+    font-size: 1rem;
+  }
+  .side-dropmenu ul .login-logout {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 330px) {
+  .mini-dropbox {
+    padding-right: 5px;
+  }
+  .mini-dropbox div {
+    width: 2rem;
+  }
 }/*# sourceMappingURL=navbar.css.map */

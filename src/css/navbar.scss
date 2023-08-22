@@ -16,10 +16,14 @@ $background-color: #333436;
   background-color: $background-color;
   height: 96px;
   z-index: 6;
+  .main-nav-logo{
+    cursor: pointer;
+  }
 }
 // 메인 네비게이션 메뉴 부분
 .main-nav-menu-container{
   display: flex;
+  
   .main-nav-menu{
     background-color: $background-color;
     font-weight: bold;
@@ -37,6 +41,12 @@ $background-color: #333436;
     }
     &:hover a{
       color: $primary-color;
+    }
+    .mini-dropbox{
+      display: none;
+      // &.close{
+
+      // }
     }
   }
 }
@@ -89,3 +99,117 @@ $background-color: #333436;
   }
 }
 
+// 사이드 드랍메뉴
+.side-dropmenu{
+  width: 30%;
+  background-color: rgba(51, 52, 54, .7);
+  position: absolute;
+  top: 94px;
+  right: 0;
+  text-align: end;
+  z-index: 1;
+  ul{
+    & li:nth-child(1){
+      border-bottom: 1px solid $font-color;
+      a{
+        font-weight: bold;
+      }
+    }
+    & li:nth-last-child(1){
+      border-bottom: 1px solid $font-color;
+    }
+    li{
+      padding: .2rem 0;
+      a{
+        text-decoration: none;
+        color: $font-color;
+        font-size: 1.3rem;
+      }
+    }
+    .login-user-name{
+      color: $font-color;
+      font-size: 1.3rem;
+    }
+    .login-logout{
+      color: $font-color;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+  }
+  &.hidden{
+    display: none;
+  }
+}
+
+@media (min-width: 950px){
+  .side-dropmenu{
+    display: none;
+  }
+
+}
+@media (max-width: 950px){
+  .dropmenu{
+    display: none;
+  }
+  .main-nav-menu{
+    display: none;
+  }
+  .mini-dropbox{
+    display: flex;
+    padding-right: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    div{
+      width: 3rem;
+      height: 4px;
+      background-color: $font-color;
+    }
+  }
+}
+
+@media (max-width: 770px){
+  .side-dropmenu{
+    width: 40%;
+  }
+}
+
+@media (max-width: 600px){
+  .side-dropmenu{
+    width: 50%;
+  }
+}
+
+@media (max-width: 450px){
+  .side-dropmenu{
+    width: 60%;
+  }
+}
+
+@media (max-width: 380px) {
+  .side-dropmenu{
+    ul{
+      li{
+        a{
+          font-size: 1rem;
+        }
+      }
+      .login-user-name{
+        font-size: 1rem;
+      }
+      .login-logout{
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 330px){
+  .mini-dropbox{
+    padding-right: 5px;
+    div{
+      width: 2rem;
+    }
+  }
+}
