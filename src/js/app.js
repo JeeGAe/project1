@@ -1,6 +1,3 @@
-
-
-
 // 메인 캐러셀
 const mainCarouselContainer = document.querySelector('.main-carousel-container');
 const mainIndicatorContainer = document.querySelector('.main-indicator-container');
@@ -212,7 +209,6 @@ async function isLogin(){
     credentials : "include",
   })
   .then(res => {
-    console.log(res)
     if(!res.ok){
       console.log('no login');
     }else{
@@ -261,4 +257,35 @@ const loginLogout = document.querySelectorAll('.login-logout');loginLogout.forEa
   })
   .catch(e => console.log(e));
 }))
+// 최근 공지 불러옴
+async function fetchNews() {
+  let lastNews = [];
+  await fetch(`http://127.0.0.1:3301/api/news/last`, {
+    method : 'GET',
+    headers : {
+      'Content-Type' : 'application/json',
+    },
+  })
+  .then(res => res.json())
+  .then(res => {
+    lastNews = res.searchNews;
+  })
+
+  return await new Promise(resolve => resolve({lastNews}));
+}
+
+const newsUlTag = document.querySelector('.news ul');
+fetchNews()
+.then(res => { console.log(res)
+  for(i = 0; i < 5; i++){
+    if(res){
+      const newsLiTag = document.createElement('li');
+      newsLiTag.id = res.lastNews[i].id;
+      newsLiTag.innerHTML = `
+        <a href="">${res.lastNews[i].title}</a>
+      `;
+      newsUlTag.appendChild(newsLiTag);
+    }
+  }
+})
 

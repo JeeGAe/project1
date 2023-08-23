@@ -1,0 +1,38 @@
+.news-form-container {
+  margin-top: 20%;
+  background-color: #333436;
+  padding: 1rem 0;
+}
+.news-form-container form ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+  gap: 0.5rem;
+}
+.news-form-container form ul li {
+  color: #baa178;
+  font-weight: bold;
+  list-style-type: none;
+  width: 80%;
+}
+.news-form-container form ul li input {
+  width: 80%;
+}
+.news-form-container form ul li div {
+  display: flex;
+}
+.news-form-container form ul li textarea {
+  width: 90%;
+  resize: none;
+}
+.news-form-container form .news-write-btn {
+  all: unset;
+  padding: 0.3rem 0.8rem;
+  border-radius: 5px;
+  background-color: #ba3734;
+  color: #baa178;
+  position: relative;
+  right: -80%;
+}/*# sourceMappingURL=news-wirte.css.map */

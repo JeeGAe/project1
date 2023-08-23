@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const User = require('./server/routes/Users');
-const Book = require('./server/routes/Books')
+const Book = require('./server/routes/Books');
+const News = require('./server/routes/news');
 const mongoose = require('mongoose');
 const config = require('./config');
 const cors = require('cors');
@@ -20,6 +21,7 @@ app.use(cookieparser());
 
 app.use('/api/users', User);
 app.use('/api/books', Book);
+app.use('/api/news', News);
 
 
 

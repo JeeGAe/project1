@@ -41,7 +41,9 @@ $background-color: #333436;
           width: 70%;
           margin-left: .3rem;
         }
-        .register-btn{
+        .register-btn,
+        .register-admin-btn,
+        .isAdmin-btn{
           all: unset;
           cursor: pointer;
           width: auto;
@@ -52,7 +54,11 @@ $background-color: #333436;
           text-decoration: none;
         }
       }
-      
+      .isAdmin{
+        &.hidden{
+          display: none;
+        }
+      }
     }
   }
   

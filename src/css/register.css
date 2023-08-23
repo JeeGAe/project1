@@ -39,7 +39,9 @@
   width: 70%;
   margin-left: 0.3rem;
 }
-.register-container form ul li .register-btn {
+.register-container form ul li .register-btn,
+.register-container form ul li .register-admin-btn,
+.register-container form ul li .isAdmin-btn {
   all: unset;
   cursor: pointer;
   width: auto;
@@ -48,6 +50,9 @@
   background-color: #ba3734;
   color: #baa178;
   text-decoration: none;
+}
+.register-container form ul .isAdmin.hidden {
+  display: none;
 }
 
 @media (max-width: 950px) {

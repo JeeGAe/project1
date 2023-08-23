@@ -15,6 +15,7 @@ router.post('/register', expressAsyncHandler(async (req, res, next) => {
     id : req.body.id,
     password : req.body.password,
     name : req.body.name,
+    isAdmin : req.body.isAdmin,
   })
   
   const newUser = await user.save();
@@ -46,8 +47,8 @@ router.post('/login', expressAsyncHandler(async (req, res) => {
 // 로그인 했는지 확인
 router.get('/isLogin', isAuth, expressAsyncHandler(async (req, res) => {
   console.log(req.cookies.Token);
-  const { name } = req.user;
-  res.status(200).json({ code : 200, message : 'Ok', name });
+  const { name, isAdmin } = req.user;
+  res.status(200).json({ code : 200, message : 'Ok', name, isAdmin });
   // const token = req.cookies.Token;
   // console.log(token);
   // if(!token){

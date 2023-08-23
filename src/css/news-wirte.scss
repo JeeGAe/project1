@@ -1,0 +1,45 @@
+$primary-color: #baa178;
+$secodary-color: #ba3734;
+$font-color: #bebebc;
+$background-color: #333436;
+
+.news-form-container{
+  margin-top: 20%;
+  background-color: $background-color;
+  padding: 1rem 0;
+  form{
+    ul{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      width: 100%;
+      gap: .5rem;
+      li{
+        color: $primary-color;
+        font-weight: bold;
+        list-style-type: none;
+        width: 80%;
+        input{
+          width: 80%;
+        }
+        div{
+          display: flex;
+        }
+        textarea{
+          width: 90%;
+          resize: none;
+        }
+      }
+    }
+    .news-write-btn{
+      all: unset;
+      padding: .3rem .8rem;
+      border-radius: 5px;
+      background-color: $secodary-color;
+      color: $primary-color;
+      position: relative;
+      right: -80%;
+    }
+  }
+}

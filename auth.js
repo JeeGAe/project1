@@ -8,6 +8,7 @@ function createToken(user){
     _id : user._id,
     id : user.id,
     name : user.name,
+    isAdmin : user.isAdmin,
   }, 
   config.JWT_SECRET,
   {
@@ -19,7 +20,7 @@ function createToken(user){
 function isAuth(req, res, next){
   const token = req.cookies.Token;
   if(!token){
-    res.status(401).json({ code : 401, message : 'Invalid token'});
+    res.status(401).json({ code : 401, message : 'Not token'});
   }else{
     jwt.verify(token, config.JWT_SECRET, (err, user) => {
       if(err && err.name === 'TokenExpiredError'){
@@ -34,7 +35,17 @@ function isAuth(req, res, next){
   }
 }
 
+function isAdmin(req, res, next){
+  console.log(req.user)
+  if(!req.user.isAdmin){
+    res.status(403).json({ code : 403, message: "You are not admin!"});
+  }else{
+    next();
+  }
+}
+
 module.exports = {
   createToken,
   isAuth,
+  isAdmin,
 }
