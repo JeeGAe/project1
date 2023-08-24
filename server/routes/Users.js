@@ -30,12 +30,15 @@ router.post('/register', expressAsyncHandler(async (req, res, next) => {
 // 로그인
 router.post('/login', expressAsyncHandler(async (req, res) => {
   const { id, password } = req.body;
-  const loginUser = await User.findOne({ id : id, password: password });
-  const token = createToken(loginUser);
-  console.log(token);
+  const loginUser = await User.findOne({ 
+    id : id, 
+    password: password
+  });
+  
   if(!loginUser){
     res.status(401).send({ code : 401, message : 'Invalid user id or password!'});
   }else{
+    const token = createToken(loginUser);
     res.cookie('Token', token, {
       // secure : false,
       // httpOnly : true,
@@ -46,7 +49,6 @@ router.post('/login', expressAsyncHandler(async (req, res) => {
 
 // 로그인 했는지 확인
 router.get('/isLogin', isAuth, expressAsyncHandler(async (req, res) => {
-  console.log(req.cookies.Token);
   const { name, isAdmin } = req.user;
   res.status(200).json({ code : 200, message : 'Ok', name, isAdmin });
   // const token = req.cookies.Token;

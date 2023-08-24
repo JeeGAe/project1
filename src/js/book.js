@@ -69,7 +69,7 @@ chageMonth.addEventListener('click', (event) => {
     createCalendar(selectYear, selectMonth);
   }
 })
-// 예약 캘린터에서 일 수를 클릭했을때 이벤트
+// 연화룸을 선택하기전에 날짜를 누르면 나타나는 이벤트
 function afterBanquetSelect(){
   const afterBanquetSelectPTag = document.querySelector('#after-banquet-select');
   afterBanquetSelectPTag.innerText = '연회장을 먼저 선택해주세요!'
@@ -77,7 +77,7 @@ function afterBanquetSelect(){
 
 const tbody = document.querySelector('tbody');
 tbody.addEventListener('click', afterBanquetSelect);
-
+// 날짜 선택시의 함수
 function clickDate(event){
   if(event.target.tagName === 'TD' && event.target.textContent){
     const dateTds = document.querySelectorAll('tbody tr td');
@@ -102,7 +102,6 @@ function clickDate(event){
     })
     .then(res => res.json())
     .then(res => {
-      console.log(res)
       if(res.reservation.length === 1){
         if(res.reservation[0].bookAm){
           const amBtn = document.querySelector('#am-btn');
@@ -126,7 +125,7 @@ function clickDate(event){
     })
   }
 }
-
+// 연회룸 선택시 날짜를 선택 가능하게함
 const banquetSelectorContainer = document.querySelector('.banquet-selector-container');
 banquetSelectorContainer.addEventListener('click', (event) => {
   
@@ -140,13 +139,11 @@ banquetSelectorContainer.addEventListener('click', (event) => {
     });
     event.target.classList.add('select-banquet');
     selectBanquet = event.target.textContent;
-    console.log(event.target)
     const bookDate = document.querySelector('tbody');
-    console.log(bookDate)
     bookDate.addEventListener('click', clickDate);
   }
 })
-
+// 예약하기 버튼 클릭시 서버에 예약 데이터 보냄
 function bookToServer(event){
   fetch('http://127.0.0.1:3301/api/books', {
     method : 'POST',
@@ -163,7 +160,7 @@ function bookToServer(event){
   })
   .then((res) => { location.reload();})
 }
-
+// 오전 오후 중 선택하면 예약하기 버튼 이벤트 활성화
 const am_pmContainer = document.querySelector('.am-pm-container');
 am_pmContainer.addEventListener('click', (event) => {
   if(event.target.tagName === 'BUTTON'){
@@ -184,7 +181,7 @@ am_pmContainer.addEventListener('click', (event) => {
     bookBtn.addEventListener('click', bookToServer);
   }
 })
-// 예약 목록 패치
+// 예약 목록 조회
 fetch('http://127.0.0.1:3301/api/books', {
   method : 'GET',
   credentials : "include",
@@ -209,18 +206,19 @@ fetch('http://127.0.0.1:3301/api/books', {
   }
   
 })
-
+// 예약 목록 삭제
 const bookedContaier = document.querySelector('.booked-contaier');
 bookedContaier.addEventListener('click', (event) => {
   if(event.target.tagName = 'BUTTON'){
     const delReservation = event.target.previousSibling;
+    const total = delReservation.innerText.slice(0,10);
     const delYear = parseInt(delReservation.innerText.slice(0,4));
     const delMonth = parseInt(delReservation.innerText.slice(5,7));
     const delDate = parseInt(delReservation.innerText.slice(8,10));
     const delBanquet = delReservation.innerText.slice(11, delReservation.innerText.length-3);
     const dleTime = delReservation.innerText.slice(delReservation.innerText.length-2,delReservation.innerText.lengths);
     let isAm = false;
-    let isPm = false
+    let isPm = false;
     if(dleTime === '오전'){
       isAm = true;
     }else{
@@ -232,6 +230,7 @@ bookedContaier.addEventListener('click', (event) => {
         'Content-Type' : 'Application/json',
       },
       body : JSON.stringify({
+        total : total,
         year : delYear,
         month : delMonth,
         date : delDate,

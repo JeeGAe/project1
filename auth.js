@@ -36,7 +36,6 @@ function isAuth(req, res, next){
 }
 
 function isAdmin(req, res, next){
-  console.log(req.user)
   if(!req.user.isAdmin){
     res.status(403).json({ code : 403, message: "You are not admin!"});
   }else{

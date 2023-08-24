@@ -33,6 +33,7 @@ eventIndicatorContainer.children[eventCount - 1].classList.add('highlight');
 //   }
 // }, 3000);
 
+// 메인 캐러셀과 인디케이터 움직임 효과
 setInterval(() => {
   if(count === 5){
     count = 0;
@@ -46,7 +47,7 @@ setInterval(() => {
   count++;
 }, 3000);
 
-// 메인 캐러셀 인디케이터
+// 메인 캐러셀 인디케이터 클릭 효과
 mainIndicatorContainer.addEventListener('click', event => {
   if(event.target.className === 'main-indicator'){
     for(let i = 0; i < 5; i++){
@@ -59,25 +60,23 @@ mainIndicatorContainer.addEventListener('click', event => {
   }
 })
 
-// 이벤트 캐러셀
-setInterval(() => {
-  // 캐러셀 영역
-  
+// 이벤트 캐러셀과 인디케이터 움직임 효과
+setInterval(() => {  
   if(eventCount === 5){
     eventCount = 0;
     // eventCarousel.scrollTo({left : 0, top : 0, behavior : 'smooth'});
     eventIndicatorContainer.children[4].classList.remove('highlight');
   }
+
   const eventCarouselWidth = eventCarousel.getBoundingClientRect().width;
   eventCarousel.scrollTo({left : eventCarouselWidth * eventCount, top : 0, behavior : 'smooth'});
   
-  // 캐러셀 인디케이터 영역
   eventIndicatorContainer.children[eventCount].classList.add('highlight');
   eventIndicatorContainer.children[eventCount - 1]?.classList.remove('highlight');
   eventCount++;
 },3000)
 
-// 이벤트 캐러셀 인디케이터
+// 이벤트 캐러셀 인디케이터 클릭 효과
 eventIndicatorContainer.addEventListener('click', event => {
   if(event.target.className === 'event-indicator'){
     for(let i = 0; i < 5; i++){
@@ -103,16 +102,18 @@ window.addEventListener('resize', () => {
   eventCarousel.scrollTo(eventCarouselWidth * (eventCount-1), 0);
 })
 
-function createScrollImgContent(url, direction){
-  const scrollImgContainer = document.createElement('div');
-  scrollImgContainer.classList.add('scroll-img-container');
-  scrollImgContainer.classList.add(direction);
-  scrollImgContainer.innerHTML = `
-    <img src=${url} alt="">
-  `
-}
 
 // 스크롤 시 효과
+// function createScrollImgContent(url, direction){
+//   const scrollImgContainer = document.createElement('div');
+//   scrollImgContainer.classList.add('scroll-img-container');
+//   scrollImgContainer.classList.add(direction);
+//   scrollImgContainer.innerHTML = `
+//     <img src=${url} alt="">
+//   `
+// }
+
+
 let scrollCount = 0;
 window.addEventListener('scroll', (event) => {
   let scrollHeight = Math.max(
@@ -133,6 +134,7 @@ window.addEventListener('scroll', (event) => {
         scrollCount++;
       }, 100)
     }else{
+      // 끝까지 내렸을때 푸터가 보이고 스크롤 안내가 사라짐
       const footer = document.querySelector('footer');
       footer.classList.remove('hidden');
       const scrollNoticeContainer = document.querySelector('.scroll-notice-container');
@@ -144,7 +146,6 @@ window.addEventListener('scroll', (event) => {
 })
 // 로그인 모달
 function modalOpen(event) {
-  console.log('dasdas')
   event.preventDefault();
   document.body.style.overflow = 'hidden'
   const loginModalContainer = document.querySelector('.login-modal-container');
@@ -196,40 +197,30 @@ loginBtn.addEventListener('click', event => {
       location.reload();
     }
   })
-  .catch((e) => {
-    console.log(e)
-  })
+  .catch((e) => console.log(e))
 })
-// 비밀번호 인풋 창에서 엔터입력시 로그인버튼 클릭
+// 비밀번호 인풋 창에서 엔터입력시 로그인버튼 클릭(편의성)
 const passwordInput = document.querySelector('#password-input');
 passwordInput.addEventListener('keyup', (event) => {
   if(event.key === 'Enter') loginBtn.click();
 })
-// 로그인 되어있는지 체크후 로그인 페이지를 설정
+
+// 로그인 했는지 확인 후 사용자 이름 리턴
 async function isLogin(){
   let user_name = '';
+  // 토큰이 없는 경우 패치를 안함
   if(!document.cookie.includes('Token')) return ;
+
   await fetch('http://127.0.0.1:3301/api/users/isLogin',{
     method: 'GET',
     credentials : "include",
   })
-  .then(res => {
-    if(!res.ok){
-      console.log('no login');
-    }else{
-      const loginLogout = document.querySelectorAll('.login-logout');
-      loginLogout.forEach(loginLogout => loginLogout.innerText = '로그아웃');
-    }
-    return res.json();
-  })
+  .then(res => res.json())
   .then(res => {
     const { name } = res;
     user_name = name;
-    if(name){
-      const loginUserName = document.querySelectorAll('.login-user-name');
-      loginUserName.forEach(loginUserName => loginUserName.innerText = `${name}님`);
-    }
-  }).catch(e =>{
+  })
+  .catch(e =>{
     console.log(e)
   })
 
@@ -237,10 +228,17 @@ async function isLogin(){
     resolve(user_name);
   })
 }
-
+// 로그인 상태면 로그인 상태의 페이지로 변환
 isLogin()
 .then((res) => {
   if(res){
+    // 로그인 했을때 유저의 닉네임을 보여줌
+    const loginUserName = document.querySelectorAll('.login-user-name');
+    loginUserName.forEach(loginUserName => loginUserName.innerText = `${res}님`);
+    // 로그인 상태일때 로그아웃 활성화
+    const loginLogout = document.querySelectorAll('.login-logout');
+    loginLogout.forEach(loginLogout => loginLogout.innerText = '로그아웃');
+    // 로그인 상태면 모달창 대신 예약 조회 페이지로 넘어감
     book_check.forEach(book_check => book_check.removeEventListener('click', modalOpen));
     book_check.forEach(book_check => book_check.addEventListener('click', (event) => {
       event.preventDefault();
@@ -262,7 +260,7 @@ const loginLogout = document.querySelectorAll('.login-logout');loginLogout.forEa
   })
   .catch(e => console.log(e));
 }))
-// 최근 공지 불러옴
+// 최근 공지 불러옴(최대 5개)
 async function fetchNews() {
   let lastNews = [];
   await fetch(`http://127.0.0.1:3301/api/news/last`, {
@@ -275,13 +273,15 @@ async function fetchNews() {
   .then(res => {
     lastNews = res.searchNews;
   })
+  .catch(e => console.log(e));
 
   return await new Promise(resolve => resolve({lastNews}));
 }
 
 const newsUlTag = document.querySelector('.news ul');
 fetchNews()
-.then(res => { console.log(res)
+.then(res => {
+  // 불러온 공지를 공지사항 영역에 보여줌(최근 5개만)
   for(i = 0; i < 5; i++){
     if(res){
       const newsLiTag = document.createElement('li');

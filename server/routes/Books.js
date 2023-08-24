@@ -57,7 +57,7 @@ router.get('/reservation', expressAsyncHandler(async (req, res) => {
 
 // 예약 취소
 router.delete('/delete', expressAsyncHandler(async (req, res) => {
-  console.log(new Date(req.body.year, req.body.month-1, req.body.date+1),req.body.banquet,req.body.bookAm,req.body.bookPm)
+  console.log(new Date(req.body.year, req.body.month-1, req.body.date+1), req.body.banquet, req.body.bookAm, req.body.bookPm)
   const serchReservation = await Book.findOne({
     date : new Date(req.body.year, req.body.month-1, req.body.date+1),
     banquet : req.body.banquet,
