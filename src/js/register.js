@@ -23,6 +23,11 @@ registerBtn.addEventListener('click', event => {
   const user_password = registerForm[1].value;
   const user_name = registerForm[2].value;
 
+  if(!user_id.match(/^[A-Za-z0-9]+$/)){
+    alert('계정 정보를 확인해주세요!');
+    return ;
+  }
+
   fetchRegister(user_id, user_password, user_name);
 })
 

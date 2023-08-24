@@ -200,6 +200,11 @@ loginBtn.addEventListener('click', event => {
     console.log(e)
   })
 })
+// 비밀번호 인풋 창에서 엔터입력시 로그인버튼 클릭
+const passwordInput = document.querySelector('#password-input');
+passwordInput.addEventListener('keyup', (event) => {
+  if(event.key === 'Enter') loginBtn.click();
+})
 // 로그인 되어있는지 체크후 로그인 페이지를 설정
 async function isLogin(){
   let user_name = '';
