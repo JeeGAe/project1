@@ -18,7 +18,6 @@ h1 {
 .news-list-container ul li {
   padding: 0.2rem 0;
   border-bottom: 1px solid #bebebc;
-  cursor: pointer;
 }
 .news-list-container ul li a {
   text-decoration: none;
@@ -33,7 +32,7 @@ h1 {
   margin-right: 0.4rem;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 330px) {
   h1 {
     font-size: 2rem;
   }

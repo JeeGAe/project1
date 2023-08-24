@@ -9,7 +9,7 @@ function showNews(index, totalNews ,newsList){
     const newsLiTag = document.createElement('li');
     newsLiTag.id = totalNews[i].id;
     newsLiTag.innerHTML = `
-    <a href="">${totalNews[i].title}</a>
+    <a href="./news-detail.html?id=${totalNews[i].id}">${totalNews[i].title}</a>
     `;
     newsList.appendChild(newsLiTag);
   }

@@ -282,7 +282,7 @@ fetchNews()
       const newsLiTag = document.createElement('li');
       newsLiTag.id = res.lastNews[i].id;
       newsLiTag.innerHTML = `
-        <a href="">${res.lastNews[i].title}</a>
+        <a href="./src/html/news-detail.html?id=${res.lastNews[i].id}">${res.lastNews[i].title}</a>
       `;
       newsUlTag.appendChild(newsLiTag);
     }
