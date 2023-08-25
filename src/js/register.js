@@ -1,6 +1,7 @@
 function fetchRegister(user_id, user_password, user_name, isAdmin = false){
   fetch('http://localhost:3301/api/users/register', {
     method : 'POST',
+    cache : "no-store",
     headers : {
       'Content-Type' : 'application/json',
     },

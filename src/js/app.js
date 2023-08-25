@@ -138,6 +138,7 @@ async function fetchNews() {
   let lastNews = [];
   await fetch(`http://127.0.0.1:3301/api/news/last`, {
     method : 'GET',
+    cache : "no-store",
     headers : {
       'Content-Type' : 'application/json',
     },

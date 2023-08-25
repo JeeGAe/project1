@@ -112,6 +112,7 @@ function clickDate(event){
     // 예약 불가인 날의 시간에 하이라이트, 클릭불가 효과 추가
     fetch(`http://127.0.0.1:3301/api/books/reservation?year=${selectYear}&month=${selectMonth}&date=${selectDate}&banquet=${selectBanquet}`, {
       method : 'GET',
+      cache : "no-store",
     })
     .then(res => res.json())
     .then(res => {
@@ -143,6 +144,7 @@ async function bookedMonth(banquet, year, month){
   let reservation = [];
   await fetch(`http://127.0.0.1:3301/api/books/reservation?year=${year}&month=${month}&banquet=${banquet}`, {
     method : 'GET',
+    cache : "no-store",
   })
   .then(res => res.json())
   .then(res => reservation = res.reservation)
@@ -215,6 +217,7 @@ function bookToServer(event){
   fetch('http://127.0.0.1:3301/api/books', {
     method : 'POST',
     credentials : "include",
+    cache : "no-store",
     headers : {
       'Content-Type' : 'application/json'
     },
@@ -254,6 +257,7 @@ am_pmContainer.addEventListener('click', (event) => {
 fetch('http://127.0.0.1:3301/api/books', {
   method : 'GET',
   credentials : "include",
+  cache : "no-store",
 })
 .then(res => res.json())
 .then(res => {
@@ -295,6 +299,7 @@ bookedContaier.addEventListener('click', (event) => {
     }
     fetch('http://127.0.0.1:3301/api/books/delete', {
       method : 'DELETE',
+      cache : "no-store",
       headers : {
         'Content-Type' : 'Application/json',
       },

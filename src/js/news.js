@@ -17,6 +17,7 @@ function showNews(index, totalNews ,newsList){
 
 fetch('http://127.0.0.1:3301/api/News', {
   method : 'GET',
+  cache : "no-store",
   headers : {
     'Content-Type' : 'application/json',
   },
@@ -54,6 +55,7 @@ fetch('http://127.0.0.1:3301/api/News', {
 fetch('http://127.0.0.1:3301/api/users/isLogin', {
   method : 'GET',
   credentials : 'include',
+  cache : "no-store",
   headers : {
     'Content-Type' : 'application/json',
   },

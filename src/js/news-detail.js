@@ -2,6 +2,7 @@ const id = location.search.slice(4,location.search.length);
 
 fetch(`http://127.0.0.1:3301/api/news/detail/${id}`,{
   method : 'GET',
+  cache : "no-store",
   headers : {
     'Content-Type' : 'application/json',
   },

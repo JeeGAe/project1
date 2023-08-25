@@ -60,6 +60,7 @@ loginBtn.addEventListener('click', event => {
   fetch('http://127.0.0.1:3301/api/users/login',{
     method: 'POST',
     credentials : "include",
+    cache : "no-store",
     headers : {
       'Content-Type' : 'application/json',
     },
@@ -111,6 +112,7 @@ const loginLogout = document.querySelectorAll('.login-logout');loginLogout.forEa
   fetch('http://127.0.0.1:3301/api/users/logout', {
     method: 'GET',
     credentials : "include",
+    cache : "no-store",
   })
   .then(res => {
     console.log('logout')

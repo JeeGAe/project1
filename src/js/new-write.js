@@ -10,6 +10,7 @@ newsWriteBtn.addEventListener('click', event => {
     fetch('http://127.0.0.1:3301/api/news/write', {
       method : 'POST',
       credentials : 'include',
+      cache : "no-store",
       headers : {
         'Content-Type' : 'application/json',
       },
