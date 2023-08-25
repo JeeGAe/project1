@@ -49,27 +49,32 @@ createCalendar(year, month);
 // 연도와 월 옆 화살표로 월 단위 변경
 const chageMonth = document.querySelector('.chage-month');
 chageMonth.addEventListener('click', (event) => {
+  // 시간 선택 버튼 사라짐
   const timeSelectorContainer = document.querySelector('.time-selector-container');
   timeSelectorContainer.classList.add('hidden');
+  // 연도와 월을 맞게 수정
   if(event.target.className === 'prev-month'){
     selectMonth--;
     if(selectMonth < 0){
       selectMonth = 11;
       selectYear--;
     }
-    changeMonth.innerText = `${selectYear}-${selectMonth+1}`;
-    document.querySelector('tbody').innerHTML = '<tr id="first-week"></tr>';
-    createCalendar(selectYear, selectMonth);
   }else if(event.target.className === 'next-month'){
     selectMonth++;
     if(selectMonth > 11){
       selectMonth = 0;
       selectYear++;
     }
-    changeMonth.innerText = `${selectYear}-${selectMonth+1}`;
-    document.querySelector('tbody').innerHTML = '<tr id="first-week"></tr>';
-    createCalendar(selectYear, selectMonth);
   }
+  // 연도와 월을 보여주고 캘린더 초기화 후 생성
+  changeMonth.innerText = `${selectYear}-${selectMonth+1}`;
+  document.querySelector('tbody').innerHTML = '<tr id="first-week"></tr>';
+  createCalendar(selectYear, selectMonth);
+  // 그 연도와 달에 예약된 곳 하이라이트
+  bookedMonth(selectBanquet, selectYear, selectMonth)
+    .then(res => {
+      highlightBookedMonth(res);
+    })
 })
 // 연회룸을 선택하기전에 날짜를 누르면 나타나는 이벤트
 function afterBanquetSelect(){
@@ -104,7 +109,7 @@ function clickDate(event){
     //     btn.classList.remove('select-time');
     //   }
     // });
-    // 예약 불가인 지점에 하이라이트, 클릭불가 효과 추가
+    // 예약 불가인 날의 시간에 하이라이트, 클릭불가 효과 추가
     fetch(`http://127.0.0.1:3301/api/books/reservation?year=${selectYear}&month=${selectMonth}&date=${selectDate}&banquet=${selectBanquet}`, {
       method : 'GET',
     })
@@ -133,6 +138,44 @@ function clickDate(event){
     })
   }
 }
+// 연회룸과 연도와 월이 일치하는 예약된 리스트를 반환
+async function bookedMonth(banquet, year, month){
+  let reservation = [];
+  await fetch(`http://127.0.0.1:3301/api/books/reservation?year=${year}&month=${month}&banquet=${banquet}`, {
+    method : 'GET',
+  })
+  .then(res => res.json())
+  .then(res => reservation = res.reservation)
+  .catch(e => console.log(e))
+  
+   return await new Promise(resolve => resolve(reservation));
+}
+// 캘린더의 예약된 날에 하이라이트
+function highlightBookedMonth(res){
+  const dateTds = document.querySelectorAll('tbody tr td');
+  dateTds.forEach(td => {
+    let countBooked = 0;
+    // 데이터로 받아온 날짜에는 한자리인 경우 0이 있어 같게 추가
+    let tdDate = '';
+    td.textContent.length === 1 ? tdDate = `0${td.textContent}` : tdDate = td.textContent;
+    let tdMonth = '';
+    selectMonth + 1 < 10 ? tdMonth = `0${selectMonth + 1}` : tdMonth = `${selectMonth}`;
+    const tdDay = `${year}-${tdMonth}-${tdDate}`;
+
+    for(let i = 0; i < res.length; i++){
+      // 캘린더 빈칸은 넘어감
+      if(!td.textContent) continue;
+      if(tdDay === res[i].date.slice(0,10)) countBooked++;
+    }
+    // 오전 오후 중 하나만 예약된것과 둘다 예약 된것에 다른 하이라이트
+    if(countBooked === 1){
+      td.classList.add('booked-one');
+    }else if(countBooked === 2){
+      td.classList.add('booked-all');
+    }
+  })
+}
+
 // 연회룸 선택시 이벤트
 const banquetSelectorContainer = document.querySelector('.banquet-selector-container');
 banquetSelectorContainer.addEventListener('click', (event) => {
@@ -144,20 +187,27 @@ banquetSelectorContainer.addEventListener('click', (event) => {
     const dateTds = document.querySelectorAll('tbody tr td');
     dateTds.forEach(td => {
       td.classList.remove('select-date');
+      td.classList.remove('booked-one');
+      td.classList.remove('booked-all');
     });
     // 연회룸 전에 날짜를 눌렀을때 멘트 삭제
     const afterBanquetSelectPTag = document.querySelector('#after-banquet-select');
     afterBanquetSelectPTag.innerText = '';
     tbody.removeEventListener('click', afterBanquetSelect);
-    // 연회룸 선택시 날짜를 선택 가능하게함
+    // 연회룸 선택시 하이라이트 삭제
     const banquetBtns = document.querySelectorAll('.banquet-selector-container button');
     banquetBtns.forEach(btn => {
       btn.classList.remove('select-banquet');
     });
     event.target.classList.add('select-banquet');
     selectBanquet = event.target.textContent;
-    const bookDate = document.querySelector('tbody');
-    bookDate.addEventListener('click', clickDate);
+    const calendarTbody = document.querySelector('tbody');
+    calendarTbody.addEventListener('click', clickDate);
+    // 캘린더에 예약된 날에 하이라이트
+    bookedMonth(selectBanquet, selectYear, selectMonth)
+    .then(res => {
+      highlightBookedMonth(res);
+    })
   }
 })
 // 예약하기 버튼 클릭시 서버에 예약 데이터 보냄

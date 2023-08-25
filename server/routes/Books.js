@@ -49,10 +49,19 @@ router.get('/', isAuth, expressAsyncHandler(async (req, res) => {
 
 // 특정 날짜 예약 목록
 router.get('/reservation', expressAsyncHandler(async (req, res) => {
-  const reservation = await Book.find({ 
-    date : new Date(req.query.year, req.query.month, parseInt(req.query.date) + 1),
-    banquet : req.query.banquet,
-  })
+  let reservation = [];
+  if(req.query.date){
+    reservation = await Book.find({ 
+      date : new Date(req.query.year, req.query.month, parseInt(req.query.date) + 1),
+      banquet : req.query.banquet,
+    })
+  }else{
+    reservation = await Book.find({ 
+      banquet : req.query.banquet,
+      date : { $gte : new Date(req.query.year, req.query.month) , $lte : new Date(req.query.year, req.query.month+1) }
+    })
+  }
+  
   res.json({code : 200, reservation});
 }))
 
