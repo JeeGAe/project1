@@ -24,13 +24,14 @@ fetch('http://127.0.0.1:3301/api/News', {
 .then(res => res.json())
 .then(res => {
   totalNews = res.totalNews;
-  // 페이지 넘버 표시 (공지를 10개씩 페이지를 나눔)
+  // 페이지 넘버 표시 (공지 10개씩 페이지를 나눔)
   let newsPage = parseInt(totalNews.length / 10) + 1;
   if(totalNews.length % 10 === 0) newsPage--;
   const newsListPage = document.querySelector('.news-list-page');
   for(let i = 1; i <= newsPage; i++){
     const newsPageLi = document.createElement('li');
     newsPageLi.innerText = `${i}`;
+    if(i === 1) newsPageLi.classList.add('select-page');
     newsListPage.appendChild(newsPageLi);
   }
 
@@ -41,8 +42,10 @@ fetch('http://127.0.0.1:3301/api/News', {
   newsListPage.addEventListener('click', event => {
     if(event.target.tagName === 'LI'){
       newsList.innerText = '';
+      newsListPage.querySelector('.select-page').classList.remove('select-page');
+      event.target.classList.add('select-page');
       index = parseInt(event.target.innerText) - 1;
-      showNews(index, totalNews, newsList)
+      showNews(index, totalNews, newsList);
     }
   })
 })

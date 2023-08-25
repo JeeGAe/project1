@@ -35,6 +35,10 @@ h1{
     justify-content: center;
     li{
       margin-right: .4rem;
+      cursor: pointer;
+      &.select-page{
+        background-color: $font-color;
+      }
     }
   }
 }

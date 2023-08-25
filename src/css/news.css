@@ -32,6 +32,10 @@ h1 {
 }
 .news-list-container .news-list-page li {
   margin-right: 0.4rem;
+  cursor: pointer;
+}
+.news-list-container .news-list-page li.select-page {
+  background-color: #bebebc;
 }
 
 @media (max-width: 330px) {
