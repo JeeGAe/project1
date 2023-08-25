@@ -4,6 +4,8 @@ $font-color: #bebebc;
 $background-color: #333436;
 
 h1{
+  position: relative;
+  z-index: -50;
   margin-top: 1.5rem;
   margin-left: 1.5rem;
   font-size: 3rem;

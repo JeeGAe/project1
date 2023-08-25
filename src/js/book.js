@@ -49,6 +49,8 @@ createCalendar(year, month);
 // 연도와 월 옆 화살표로 월 단위 변경
 const chageMonth = document.querySelector('.chage-month');
 chageMonth.addEventListener('click', (event) => {
+  const timeSelectorContainer = document.querySelector('.time-selector-container');
+  timeSelectorContainer.classList.add('hidden');
   if(event.target.className === 'prev-month'){
     selectMonth--;
     if(selectMonth < 0){
@@ -69,7 +71,7 @@ chageMonth.addEventListener('click', (event) => {
     createCalendar(selectYear, selectMonth);
   }
 })
-// 연화룸을 선택하기전에 날짜를 누르면 나타나는 이벤트
+// 연회룸을 선택하기전에 날짜를 누르면 나타나는 이벤트
 function afterBanquetSelect(){
   const afterBanquetSelectPTag = document.querySelector('#after-banquet-select');
   afterBanquetSelectPTag.innerText = '연회장을 먼저 선택해주세요!'
@@ -80,24 +82,30 @@ tbody.addEventListener('click', afterBanquetSelect);
 // 날짜 선택시의 함수
 function clickDate(event){
   if(event.target.tagName === 'TD' && event.target.textContent){
+    // 이전 선택 날짜 하이라이트 초기화 후 현재 하이라이트
     const dateTds = document.querySelectorAll('tbody tr td');
     dateTds.forEach(td => {
       td.classList.remove('select-date');
     })
     event.target.classList.add('select-date');
+    // 시간 선택 버튼 보여줌
     const timeSelectorContainer = document.querySelector('.time-selector-container');
     timeSelectorContainer.classList.remove('hidden');
+    // 이전 시간 이미예약된 하이라이트, 효과 초기화
     timeSelectorContainer.querySelectorAll('button').forEach(button => {
       button.classList.remove('impossible');
       button.disabled = false;
+      button.classList.remove('select-time');
     })
     selectDate = parseInt(event.target.textContent);
-    document.querySelectorAll('.am-pm-container button').forEach(btn => {
-      if(!btn.className.includes('impossible')){
-        btn.classList.remove('select-time');
-      }
-    });
-    fetch(`http://127.0.0.1:3301/api/books/reservation?year=${selectYear}&month=${selectMonth}&date=${selectDate}`, {
+    // 이전 선택한 시간 하이라이트 초기화
+    // document.querySelectorAll('.am-pm-container button').forEach(btn => {
+    //   if(!btn.className.includes('impossible')){
+    //     btn.classList.remove('select-time');
+    //   }
+    // });
+    // 예약 불가인 지점에 하이라이트, 클릭불가 효과 추가
+    fetch(`http://127.0.0.1:3301/api/books/reservation?year=${selectYear}&month=${selectMonth}&date=${selectDate}&banquet=${selectBanquet}`, {
       method : 'GET',
     })
     .then(res => res.json())
@@ -125,14 +133,23 @@ function clickDate(event){
     })
   }
 }
-// 연회룸 선택시 날짜를 선택 가능하게함
+// 연회룸 선택시 이벤트
 const banquetSelectorContainer = document.querySelector('.banquet-selector-container');
 banquetSelectorContainer.addEventListener('click', (event) => {
-  
   if(event.target.tagName === 'BUTTON'){
+    // 연회룸 클릭시 오전 오후 선택 숨김
+    const timeSelectorContainer = document.querySelector('.time-selector-container');
+    timeSelectorContainer.classList.add('hidden');
+    // 연회룸 클릭시 날짜에 하이라이트 효과 사라짐
+    const dateTds = document.querySelectorAll('tbody tr td');
+    dateTds.forEach(td => {
+      td.classList.remove('select-date');
+    });
+    // 연회룸 전에 날짜를 눌렀을때 멘트 삭제
     const afterBanquetSelectPTag = document.querySelector('#after-banquet-select');
     afterBanquetSelectPTag.innerText = '';
     tbody.removeEventListener('click', afterBanquetSelect);
+    // 연회룸 선택시 날짜를 선택 가능하게함
     const banquetBtns = document.querySelectorAll('.banquet-selector-container button');
     banquetBtns.forEach(btn => {
       btn.classList.remove('select-banquet');
@@ -152,7 +169,9 @@ function bookToServer(event){
       'Content-Type' : 'application/json'
     },
     body : JSON.stringify({
-      date : new Date(selectYear, selectMonth, selectDate+1),
+      year : selectYear,
+      month : selectMonth,
+      date : selectDate,
       banquet : selectBanquet,
       bookAm : isAm,
       bookPm : isPm,

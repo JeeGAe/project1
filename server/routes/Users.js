@@ -41,7 +41,7 @@ router.post('/login', expressAsyncHandler(async (req, res) => {
     const token = createToken(loginUser);
     res.cookie('Token', token, {
       // secure : false,
-      // httpOnly : true,
+      httpOnly : true,
     });
     res.status(200).json({ code : 200, message : 'Login success!'})
   }
@@ -71,6 +71,7 @@ router.get('/isLogin', isAuth, expressAsyncHandler(async (req, res) => {
 
 // 로그아웃
 router.get('/logout', (req, res) => {
+  // res.cookie('Token', '');
   res.clearCookie('Token');
   res.status(200).json({ code : 200, message: 'logout'});
 })

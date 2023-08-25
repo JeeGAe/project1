@@ -1,3 +1,5 @@
+import { isLogin } from './fetch.js'
+
 // 메인 캐러셀
 const mainCarouselContainer = document.querySelector('.main-carousel-container');
 const mainIndicatorContainer = document.querySelector('.main-indicator-container');
@@ -89,8 +91,6 @@ eventIndicatorContainer.addEventListener('click', event => {
   }
 })
 
-
-
 // 브라우저 크기가 바뀌었을때 스크롤 위치를 조정
 window.addEventListener('resize', () => {
   // 메인 캐러셀 위치 조정
@@ -101,18 +101,6 @@ window.addEventListener('resize', () => {
   const eventCarouselWidth = eventCarousel.getBoundingClientRect().width;
   eventCarousel.scrollTo(eventCarouselWidth * (eventCount-1), 0);
 })
-
-
-// 스크롤 시 효과
-// function createScrollImgContent(url, direction){
-//   const scrollImgContainer = document.createElement('div');
-//   scrollImgContainer.classList.add('scroll-img-container');
-//   scrollImgContainer.classList.add(direction);
-//   scrollImgContainer.innerHTML = `
-//     <img src=${url} alt="">
-//   `
-// }
-
 
 let scrollCount = 0;
 window.addEventListener('scroll', (event) => {
@@ -144,122 +132,7 @@ window.addEventListener('scroll', (event) => {
     
   }
 })
-// 로그인 모달
-function modalOpen(event) {
-  event.preventDefault();
-  document.body.style.overflow = 'hidden'
-  const loginModalContainer = document.querySelector('.login-modal-container');
-  loginModalContainer.classList.remove('hidden');
-  const loginModalCloseBtn = document.querySelector('.login-modal-close-btn');
-  const blurContainer = document.querySelector('.blur-container');
-  blurContainer.classList.remove('hidden');
-  loginModalCloseBtn.addEventListener('click', () => {
-    loginModalContainer.classList.add('hidden');
-    blurContainer.classList.add('hidden');
-    document.body.style.overflow = ''
-  })
-  
-}
-// 예약 조회 클릭시 비로그인 상태면 로그인 창 열기
-const book_check = document.querySelectorAll('.book-check');
-book_check.forEach(book_check => book_check.addEventListener('click', modalOpen));
 
-const navBook = document.querySelector('.nav-book');
-navBook.addEventListener('click', (event) => {
-  event.preventDefault();
-})
-
-// 로그인 버튼 클릭시 로그인 api에 data 전송
-const loginBtn = document.getElementById('login-btn');
-loginBtn.addEventListener('click', event => {
-  event.preventDefault();
-  const loginForm = document.getElementById('login-form');
-  user_id = loginForm[0].value;
-  user_password = loginForm[1].value;
-
-  fetch('http://127.0.0.1:3301/api/users/login',{
-    method: 'POST',
-    credentials : "include",
-    headers : {
-      'Content-Type' : 'application/json',
-    },
-    body : JSON.stringify({
-      id : user_id,
-      password : user_password,
-    })
-  })
-  .then((res) => {
-    if(!res.ok){
-      const failedLogin = document.getElementById('failed-login');
-      failedLogin.innerText = '사용자 정보를 확인해주세요!';
-    }else{
-      console.log("로그인 응답", document.cookie);
-      location.reload();
-    }
-  })
-  .catch((e) => console.log(e))
-})
-// 비밀번호 인풋 창에서 엔터입력시 로그인버튼 클릭(편의성)
-const passwordInput = document.querySelector('#password-input');
-passwordInput.addEventListener('keyup', (event) => {
-  if(event.key === 'Enter') loginBtn.click();
-})
-
-// 로그인 했는지 확인 후 사용자 이름 리턴
-async function isLogin(){
-  let user_name = '';
-  // 토큰이 없는 경우 패치를 안함
-  if(!document.cookie.includes('Token')) return ;
-
-  await fetch('http://127.0.0.1:3301/api/users/isLogin',{
-    method: 'GET',
-    credentials : "include",
-  })
-  .then(res => res.json())
-  .then(res => {
-    const { name } = res;
-    user_name = name;
-  })
-  .catch(e =>{
-    console.log(e)
-  })
-
-  return await new Promise(resolve => {
-    resolve(user_name);
-  })
-}
-// 로그인 상태면 로그인 상태의 페이지로 변환
-isLogin()
-.then((res) => {
-  if(res){
-    // 로그인 했을때 유저의 닉네임을 보여줌
-    const loginUserName = document.querySelectorAll('.login-user-name');
-    loginUserName.forEach(loginUserName => loginUserName.innerText = `${res}님`);
-    // 로그인 상태일때 로그아웃 활성화
-    const loginLogout = document.querySelectorAll('.login-logout');
-    loginLogout.forEach(loginLogout => loginLogout.innerText = '로그아웃');
-    // 로그인 상태면 모달창 대신 예약 조회 페이지로 넘어감
-    book_check.forEach(book_check => book_check.removeEventListener('click', modalOpen));
-    book_check.forEach(book_check => book_check.addEventListener('click', (event) => {
-      event.preventDefault();
-      location.href = './src/html/book.html'
-    }));
-  }
-})
-
-// 로그아웃 버튼 이벤트
-const loginLogout = document.querySelectorAll('.login-logout');loginLogout.forEach(loginLogout => loginLogout.addEventListener('click', (event) => {
-  event.preventDefault();
-  fetch('http://127.0.0.1:3301/api/users/logout', {
-    method: 'GET',
-    credentials : "include",
-  })
-  .then(res => {
-    console.log('logout')
-    location.reload();
-  })
-  .catch(e => console.log(e));
-}))
 // 최근 공지 불러옴(최대 5개)
 async function fetchNews() {
   let lastNews = [];
@@ -282,7 +155,7 @@ const newsUlTag = document.querySelector('.news ul');
 fetchNews()
 .then(res => {
   // 불러온 공지를 공지사항 영역에 보여줌(최근 5개만)
-  for(i = 0; i < 5; i++){
+  for(let i = 0; i < 5; i++){
     if(res){
       const newsLiTag = document.createElement('li');
       newsLiTag.id = res.lastNews[i].id;
