@@ -157,7 +157,7 @@ fetchNews()
 .then(res => {
   // 불러온 공지를 공지사항 영역에 보여줌(최근 5개만)
   for(let i = 0; i < 5; i++){
-    if(res){
+    if(res.lastNews[i]){
       const newsLiTag = document.createElement('li');
       newsLiTag.id = res.lastNews[i].id;
       newsLiTag.innerHTML = `
