@@ -37,7 +37,8 @@ h1{
       margin-right: .4rem;
       cursor: pointer;
       &.select-page{
-        background-color: $font-color;
+        font-weight: bold;
+        color: $primary-color;
       }
     }
   }

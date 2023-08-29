@@ -35,7 +35,8 @@ h1 {
   cursor: pointer;
 }
 .news-list-container .news-list-page li.select-page {
-  background-color: #bebebc;
+  font-weight: bold;
+  color: #baa178;
 }
 
 @media (max-width: 330px) {
