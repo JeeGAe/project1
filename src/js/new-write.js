@@ -1,3 +1,4 @@
+// 공지사항 제목과 내용을 적고 작성 버튼을 누르면 서버로 해당 내용 전송
 const newsWriteBtn = document.querySelector('.news-write-btn');
 newsWriteBtn.addEventListener('click', event => {
   event.preventDefault();

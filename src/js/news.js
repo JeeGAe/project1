@@ -1,7 +1,7 @@
 // 현재 news 리스트를 받아서 보여줌
 let totalNews = [];
 let index = 0;
-
+// 페이지 네이션에 따라 10개 묶음으로 공지리스트 보여줌
 function showNews(index, totalNews ,newsList){
   for(let i = 1 * (index * 10); i < (index + 1) * 10; i++){
     if(!totalNews[i]) return ;
@@ -14,7 +14,7 @@ function showNews(index, totalNews ,newsList){
     newsList.appendChild(newsLiTag);
   }
 }
-
+// 공지 리스트를 응답받음
 fetch('http://127.0.0.1:3301/api/News', {
   method : 'GET',
   cache : "no-store",

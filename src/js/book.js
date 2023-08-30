@@ -109,6 +109,7 @@ function clickDate(event){
     //     btn.classList.remove('select-time');
     //   }
     // });
+    
     // 예약 불가인 날의 시간에 하이라이트, 클릭불가 효과 추가
     fetch(`http://127.0.0.1:3301/api/books/reservation?year=${selectYear}&month=${selectMonth}&date=${selectDate}&banquet=${selectBanquet}`, {
       method : 'GET',

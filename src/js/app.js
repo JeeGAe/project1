@@ -52,6 +52,7 @@ setInterval(() => {
 // 메인 캐러셀 인디케이터 클릭 효과
 mainIndicatorContainer.addEventListener('click', event => {
   if(event.target.className === 'main-indicator'){
+    // 모든 인디케이터 하이라이트 제거
     for(let i = 0; i < 5; i++){
       mainIndicatorContainer.children[i].classList.remove('highlight');
     }
@@ -81,6 +82,7 @@ setInterval(() => {
 // 이벤트 캐러셀 인디케이터 클릭 효과
 eventIndicatorContainer.addEventListener('click', event => {
   if(event.target.className === 'event-indicator'){
+    // 모든 인디케이터 하이라이트 삭제
     for(let i = 0; i < 5; i++){
       eventIndicatorContainer.children[i].classList.remove('highlight');
     }
@@ -113,6 +115,7 @@ window.addEventListener('scroll', (event) => {
     const scrollContentsContainer = document.querySelector('.scroll-contents-container');
     if(scrollContentsContainer.children[scrollCount]){
       scrollContentsContainer.children[scrollCount].classList.add('scroll-show');
+      // 시간 차를 두어 앞의 display 설정을 바꾸고 애니메이션 효과가 적용 될 수 있도록함 (같이하면 애니메이션 효과 적용안됨)
       setTimeout(() => {
         for(let i = 0; i < 2; i++){
           scrollContentsContainer.children[scrollCount].children[i].classList.remove('scroll-move-down');
@@ -157,7 +160,7 @@ fetchNews()
 .then(res => {
   // 불러온 공지를 공지사항 영역에 보여줌(최근 5개만)
   for(let i = 0; i < 5; i++){
-    if(res){
+    if(res.lastNews[i]){
       const newsLiTag = document.createElement('li');
       newsLiTag.id = res.lastNews[i].id;
       newsLiTag.innerHTML = `

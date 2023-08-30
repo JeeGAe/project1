@@ -1,10 +1,10 @@
 import { isLogin } from './fetch.js'
-
+// 마우스가 네이게이션 헤더영역에서 나가면 드랍다운 메뉴 안보이게함
 const header = document.querySelector('header');
 header.addEventListener('mouseleave', (event) => {
   header.querySelector('.dropmenu').classList.remove('move-down');
 })
-
+// 마우스가 헤더영역에 들어오면 드랍다운 메뉴 보이게함
 const mainNav = header.querySelector('.main-nav');
 mainNav.addEventListener('mouseover', (event) => {
   if(event.target.className.includes('main-nav-menu')){
@@ -12,13 +12,13 @@ mainNav.addEventListener('mouseover', (event) => {
     dropmenu.classList.add('move-down');
   }
 })
-
+// 반응형으로 작은 화면에서 사이드 드랍메뉴를 나타나게함
 const miniDropmenu = header.querySelector('.mini-dropbox');
 miniDropmenu.addEventListener('click', () => {
   const sideDropmenu = document.querySelector('.side-dropmenu');
   sideDropmenu.classList.toggle('hidden');
 })
-
+// 로고 클릭시 메인 페이지로 이동
 const mainNavLogo = header.querySelector('.main-nav-logo');
 mainNavLogo.addEventListener('click', () => {
   location.href= '/index.html';
