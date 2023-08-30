@@ -26,3 +26,17 @@
 ### 관리자의 공지 사항 작성 및 수정 그리고 모든 유저가 공지 조회
 
 ## 시연 영상
+### 메인 페이지
+<img width="80%" src="https://github.com/JeeGAe/project1/assets/139299845/5a061186-9751-439d-8a0d-faf6b2d443ce"/>
+
+### 회원가입
+<img width="80%" src="https://github.com/JeeGAe/project1/assets/139299845/f3af4235-54bf-475c-b17d-192052265f91"/>
+
+### 로그인
+<img width="80%" src="https://github.com/JeeGAe/project1/assets/139299845/d4508c28-5dae-4f4c-8795-5dd6812d4db1"/>
+
+### 공지사항
+<img width="80%" src="https://github.com/JeeGAe/project1/assets/139299845/c0cc52b4-68c4-456f-a6a0-a6faf3534112"/>
+
+### 예약
+<img width="80%" src="https://github.com/JeeGAe/project1/assets/139299845/c4b24ac4-ea50-4fbf-a2ed-f62d5eb64c46"/>
